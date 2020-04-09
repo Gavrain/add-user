@@ -4,7 +4,7 @@
     <div class="main">
       <div class="wechat">WeChat name</div>
       <div>
-        职位：
+        <span>职位：</span>
         <span class="no-job" v-if="jobs.length==0">！请添加职位</span>
         <span class="jobs" v-else>{{selectedJobs}}</span>
       </div>
@@ -33,12 +33,10 @@ export default {
   },
   computed: {
     selectedJobs() {
-      var arr = []
-      for (let i = 0; i < this.jobList.length; i++) {
-        if (this.jobs.includes(this.jobList[i].value)) arr.push(this.jobList[i].text)
-      }
-      console.log(this.jobList)
-
+      const arr = []
+      this.jobList.map(v => {
+        if (this.jobs.includes(v.value)) arr.push(v.text)
+      })
       return arr.join('，')
     }
   }
@@ -49,7 +47,7 @@ export default {
 .contain {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: top;
   box-sizing: border-box;
   position: relative;
   width: 13.68rem;
@@ -61,23 +59,28 @@ export default {
   .avatar {
     height: 1.68rem;
     width: 1.68rem;
-    margin-left: 0.44rem;
-    margin-right: 0.44rem;
+    margin: 0.2rem 0.44rem 0;
     background-color: #e5e5e5;
     border-radius: 50%;
-    transform: translate(0, -20%);
   }
 
   .main {
-    div {
+    > div {
       line-height: 1rem;
+      > span {
+        float: left;
+      }
     }
 
     .no-job {
+      display: inline-block;
+      width: 9rem;
       color: #d45b5b;
     }
 
     .jobs {
+      display: inline-block;
+      width: 9rem;
       color: #9b9b9b;
     }
 

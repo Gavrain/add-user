@@ -4,11 +4,12 @@
       <div>
         UserName：
         <input type="text" :value="uname" @input="changeName" />
+        <span class="danger" v-if="uname==''">！请输入姓名</span>
         <a class="delete" href="javascript:0" @click="deleteUser">Delete</a>
       </div>
       <div>
-        <span>职位</span>
-        <span class="no-job" v-if="jobs.length==0">！请添加职位</span>
+        <span class="jobTitle">职位</span>
+        <span class="jobs danger" v-if="jobs.length==0">！请添加职位</span>
         <span class="jobs" v-else>{{selectedJobs}}</span>
         <a class="edit" href="javascript:0" @click="showModal">编辑职位</a>
       </div>
@@ -35,12 +36,10 @@ export default {
   },
   computed: {
     selectedJobs() {
-      var arr = []
-      for (let i = 0; i < this.jobList.length; i++) {
-        if (this.jobs.includes(this.jobList[i].value)) arr.push(this.jobList[i].text)
-      }
-      console.log(this.jobList)
-
+      const arr = []
+      this.jobList.map(v => {
+        if (this.jobs.includes(v.value)) arr.push(v.text)
+      })
       return arr.join('，')
     }
   }
@@ -63,29 +62,28 @@ export default {
     width: 100%;
     > div {
       line-height: 1rem;
-      > span {
+      margin-bottom: 0.2rem;
+      > .jobTitle {
         float: left;
       }
-    }
-
-    .no-job {
-      padding-left: 0.2rem;
-      display: inline-block;
-      color: #d45b5b;
-      width: 10rem;
     }
 
     .jobs {
       padding-left: 0.2rem;
       display: inline-block;
       color: #9b9b9b;
-      width: 10.6rem;
+      width: 10rem;
+    }
+
+    .danger {
+      color: #d45b5b;
     }
 
     a {
       float: right;
       color: #57b4e0;
     }
+
     .delete {
       top: 10%;
       color: #d45b5b;

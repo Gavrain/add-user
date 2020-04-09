@@ -3,7 +3,7 @@
     <div id="title">
       <h1>{{ title }}</h1>
     </div>
-    <steps id="steps"></steps>
+    <steps id="steps" :active="active"></steps>
     <b-tabs nav-class="nav" active-nav-item-class="active-nav" no-nav-style justified>
       <b-tab class="tab" title="Scan to add" active>
         <scan
@@ -44,7 +44,7 @@
       </div>
       <div id="btns">
         <b-button class="save">Save</b-button>
-        <b-button class="next">Next</b-button>
+        <b-button class="next" @click="active=(active+1)%4">Next</b-button>
       </div>
     </div>
   </div>
@@ -60,6 +60,7 @@ export default {
     return {
       title: 'AddUser',
       modalShow: false,
+      active: 2,
       index: 0,
       Users: [
         { uname: 'Bob', jobs: [], uid: '00001' },
@@ -129,7 +130,7 @@ export default {
 
 .tabs {
   background-color: rgba(0, 0, 0, 0);
-  font-size: 0.56rem;
+  font-size: 0.55rem;
   .nav-link {
     height: 1.68rem;
     color: @basic-color;

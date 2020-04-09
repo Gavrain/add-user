@@ -12,10 +12,10 @@
 
 <script>
 export default {
+  props: ['active'],
   data() {
     return {
-      itemList: ['', '', 'Add User', 'Add Class'],
-      active: 2
+      itemList: ['', '', 'Add User', 'Add Class']
     }
   }
 }
